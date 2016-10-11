@@ -26,7 +26,7 @@ class Charts extends Facade
      * @param string $type
      * @param string $library
      */
-    public static function new($type = null, $library = null)
+    public static function newChart($type = null, $library = null)
     {
         return new Chart($type, $library);
     }
