@@ -8,7 +8,7 @@
             enabled: false
         },
         chart: {
-                    renderTo: \"$this->id\",
+            renderTo: \"$this->id\",
                     ";
 	if (!$this->responsive) {
 		$graph .= $this->width ? "width: $this->width," : '';
@@ -18,18 +18,33 @@
                     plotBackgroundColor: null,
                     plotBorderWidth: null,
                     plotShadow: false,
-                    type: 'gauge'
+                    type: 'solidgauge'
                 },
-              
-             
+                    pane: {
+            center: ['50%', '85%'],
+            size: '140%',
+            startAngle: -90,
+            endAngle: 90,
+            background: {
+                backgroundColor: (Highcharts.theme && Highcharts.theme.background2) || '#EEE',
+                innerRadius: '60%',
+                outerRadius: '100%',
+                shape: 'arc'
+            }
+        },
+                title:{text:\"$this->title\"},
                 plotOptions: {
-                   column: {
-                       pointPadding: 0.2,
-                       borderWidth: 0
-                   }
+                   solidgauge: {
+		                dataLabels: {
+		                    y: 5,
+		                    borderWidth: 0,
+		                    useHTML: true
+		                }
+		            }
                },
+               
                yAxis: {
-                 title:{text:\"$this->title\"},
+                 title:{text:\"$this->element_label\"},
                  min:$this->min,
                  max:$this->max,
                     crosshair: true
