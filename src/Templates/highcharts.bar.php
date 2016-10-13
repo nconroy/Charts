@@ -1,21 +1,26 @@
 <?php
 
-$graph = "
+	$graph = "
     <script type='text/javascript'>
         $(function () {
             var chart = new Highcharts.Chart({
-                chart: {
+                 credits: {
+            enabled: false
+        },
+        chart: {
                     renderTo: \"$this->id\",
-                    "; if (!$this->responsive) {
-    $graph .= $this->width ? "width: $this->width," : '';
-    $graph .= $this->height ? "height: $this->height," : '';
-}
-                    $graph .= "
+                    ";
+	if (!$this->responsive) {
+		$graph .= $this->width ? "width: $this->width," : '';
+		$graph .= $this->height ? "height: $this->height," : '';
+	}
+	$graph .= "
                     plotBackgroundColor: null,
                     plotBorderWidth: null,
                     plotShadow: false,
                     type: 'column'
                 },
+              
                 title: {
                     text: \"$this->title\"
                 },
@@ -28,10 +33,10 @@ $graph = "
                xAxis: {
                     categories: [
                         ";
-                        foreach ($this->labels as $label) {
-                            $graph .= "\"$label\",";
-                        }
-                        $graph .= "
+	foreach ($this->labels as $label) {
+		$graph .= "\"$label\",";
+	}
+	$graph .= "
                     ],
                     crosshair: true
                 },
@@ -39,10 +44,10 @@ $graph = "
                     name: \"$this->element_label\",
                     data: [
                     ";
-                    foreach ($this->values as $dta) {
-                        $graph .= "$dta,";
-                    }
-                    $graph .= "
+	foreach ($this->values as $dta) {
+		$graph .= "$dta,";
+	}
+	$graph .= "
                     ]
                 }]
             });
@@ -51,4 +56,4 @@ $graph = "
     <div id='$this->id'></div>
 ";
 
-return $graph;
+	return $graph;

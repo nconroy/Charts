@@ -1,16 +1,20 @@
 <?php
 
-$graph = "
+	$graph = "
     <script type='text/javascript'>
         $(function () {
             var chart = new Highcharts.Chart({
-                chart: {
+               credits: {
+            enabled: false
+        },
+          chart: {
                     renderTo: \"$this->id\",
-                    "; if (!$this->responsive) {
-    $graph .= $this->width ? "width: $this->width," : '';
-    $graph .= $this->height ? "height: $this->height," : '';
-}
-                    $graph .= "
+                    ";
+	if (!$this->responsive) {
+		$graph .= $this->width ? "width: $this->width," : '';
+		$graph .= $this->height ? "height: $this->height," : '';
+	}
+	$graph .= "
                     plotBackgroundColor: null,
                     plotBorderWidth: null,
                     plotShadow: false,
@@ -39,14 +43,14 @@ $graph = "
                     colorByPoint: true,
                     data: [
                     ";
-                    $i = 0;
-                    foreach ($this->values as $dta) {
-                        $e = $this->labels[$i];
-                        $v = $dta;
-                        $graph .= "{name: \"$e\", y: $v},";
-                        $i++;
-                    }
-                    $graph .= "
+	$i = 0;
+	foreach ($this->values as $dta) {
+		$e = $this->labels[$i];
+		$v = $dta;
+		$graph .= "{name: \"$e\", y: $v},";
+		$i++;
+	}
+	$graph .= "
                     ]
                 }]
             });
@@ -55,4 +59,4 @@ $graph = "
     <div id='$this->id'></div>
 ";
 
-return $graph;
+	return $graph;

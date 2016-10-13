@@ -1,27 +1,33 @@
 <?php
 
-$graph = "
+	$graph = "
     <script type='text/javascript'>
         $(function () {
             var chart = new Highcharts.Chart({
-
+ credits: {
+            enabled: false
+        },
                     chart: {
                         renderTo: \"$this->id\",
-                "; if (!$this->responsive) {
-    $graph .= $this->width ? "width: $this->width," : '';
-    $graph .= $this->height ? "height: $this->height," : '';
-}
-                $graph .= "
+                ";
+	if (!$this->responsive) {
+		$graph .= $this->width ? "width: $this->width," : '';
+		$graph .= $this->height ? "height: $this->height," : '';
+	}
+	$graph .= "
                 },
                 title: {
                     text: \"$this->title\",
                     x: -20 //center
                 },
                 xAxis: {
-                    categories: ["; foreach ($this->labels as $label) {
-                    $graph .= '"'.$label.'",';
-                } $graph .= "]
+                    categories: [";
+	foreach ($this->labels as $label) {
+		$graph .= '"' . $label . '",';
+	}
+	$graph .= "]
                 },
+                
                 yAxis: {
                     title: {
                         text: \"$this->element_label\"
@@ -33,16 +39,17 @@ $graph = "
                         color: '#808080'
                     }]
                 },
-                "; if ($this->colors) {
-                    $graph .= '
+                ";
+	if ($this->colors) {
+		$graph .= '
                         plotOptions: {
                             series: {
-                                color: "'.$this->colors[0].'"
+                                color: "' . $this->colors[0] . '"
                             }
                         },
                     ';
-                }
-                $graph .= "
+	}
+	$graph .= "
                 legend: {
                     layout: 'vertical',
                     align: 'right',
@@ -51,9 +58,11 @@ $graph = "
                 },
                 series: [{
                     name: '$this->element_label',
-                    data: ["; foreach ($this->values as $dta) {
-                    $graph .= $dta.',';
-                } $graph .= "]
+                    data: [";
+	foreach ($this->values as $dta) {
+		$graph .= $dta . ',';
+	}
+	$graph .= "]
                 }]
             });
         });
@@ -61,4 +70,4 @@ $graph = "
     <div id='$this->id'></div>
 ";
 
-return $graph;
+	return $graph;
